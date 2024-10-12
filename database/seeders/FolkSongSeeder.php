@@ -13,6 +13,6 @@ class FolkSongSeeder extends Seeder
      */
     public function run(): void
     {
-        FolkSong::factory()->count(10)->create();
+        FolkSong::factory()->count(100)->create();
     }
 }
