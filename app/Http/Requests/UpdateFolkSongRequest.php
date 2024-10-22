@@ -35,8 +35,7 @@ class UpdateFolkSongRequest extends FormRequest
         return [
             'title' => 'judul',
             'song' => 'lagu',
-            'region' => 'daerah'
+            'region' => 'daerah',
         ];
     }
-
 }

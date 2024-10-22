@@ -25,6 +25,7 @@ class CreateFolkSongRequest extends FormRequest
             'title' => ['required', 'unique:folk_songs,title'],
             'song' => ['required'],
             'region' => ['required'],
+            'image' => ['required'],
         ];
     }
 
@@ -33,7 +34,7 @@ class CreateFolkSongRequest extends FormRequest
         return [
             'title' => 'judul',
             'song' => 'lagu',
-            'region' => 'daerah'
+            'region' => 'daerah',
         ];
     }
 }

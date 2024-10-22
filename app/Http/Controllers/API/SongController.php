@@ -6,28 +6,39 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFolkSongRequest;
 use App\Http\Requests\UpdateFolkSongRequest;
 use App\Models\FolkSong;
-use Illuminate\Http\Request;
 
 class SongController extends Controller
 {
     public function index()
     {
-        $folkSong = FolkSong::paginate(10);
-
+        $folkSongs = FolkSong::paginate(10);
+        info($folkSongs);
         return response()->json([
             'status' => 'success',
-            'data' => $folkSong
+            'data' => $folkSongs,
         ]);
     }
 
-
     public function create(CreateFolkSongRequest $request)
     {
+
+        $request->validated();
+
         $folkSong = FolkSong::create($request->validated());
+
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $fileName = time().'.'.$request->image->extension();
+            $image->storeAs('images', $fileName);
+            $folkSong->update([
+                'image_url' => $fileName,
+            ]);
+        }
 
         return response()->json([
             'status' => 'success',
-            'data' => $folkSong
+            'data' => $folkSong,
         ], 201);
     }
 
@@ -35,9 +46,19 @@ class SongController extends Controller
     {
         $folkSong->update($request->validated());
 
+        if ($request->hasFile('image')) {
+
+            $image = $request->file('image');
+            $fileName = time().'.'.$request->image->extension();
+            $image->storeAs('images', $fileName);
+            $folkSong->update([
+                'image_url' => $fileName,
+            ]);
+        }
+
         return response()->json([
             'status' => 'success',
-            'data' => $folkSong
+            'data' => $folkSong,
         ], 200);
     }
 
@@ -47,7 +68,7 @@ class SongController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'data' => null
+            'data' => null,
         ], 204);
     }
 }

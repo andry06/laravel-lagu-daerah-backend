@@ -9,5 +9,5 @@ class FolkSong extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'song', 'region'];
+    protected $fillable = ['title', 'song', 'region', 'image_url'];
 }

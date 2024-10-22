@@ -10,5 +10,5 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/folk-songs', [SongController::class, 'index']);
 Route::post('/folk-songs', [SongController::class, 'create']);
-Route::put('/folk-songs/{folkSong}', [SongController::class, 'update']);
+Route::post('/folk-songs/{folkSong}', [SongController::class, 'update']);
 Route::delete('/folk-songs/{folkSong}', [SongController::class, 'delete']);
