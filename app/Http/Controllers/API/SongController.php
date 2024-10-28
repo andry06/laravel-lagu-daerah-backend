@@ -11,8 +11,8 @@ class SongController extends Controller
 {
     public function index()
     {
-        $folkSongs = FolkSong::paginate(10);
-        info($folkSongs);
+        $folkSongs = FolkSong::orderBy('id', 'desc')->paginate(10);
+
         return response()->json([
             'status' => 'success',
             'data' => $folkSongs,
